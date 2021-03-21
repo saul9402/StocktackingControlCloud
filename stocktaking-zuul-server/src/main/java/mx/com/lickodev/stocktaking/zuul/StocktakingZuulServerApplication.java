@@ -1,4 +1,4 @@
-package mx.com.lickodev.stocktaking;
+package mx.com.lickodev.stocktaking.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

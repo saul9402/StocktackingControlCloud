@@ -1,4 +1,4 @@
-package mx.com.lickodev.stocktaking;
+package mx.com.lickodev.stocktaking.commons;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

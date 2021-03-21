@@ -1,4 +1,4 @@
-package mx.com.lickodev.stocktaking.entity.users;
+package mx.com.lickodev.stocktaking.commons.entity.users;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
