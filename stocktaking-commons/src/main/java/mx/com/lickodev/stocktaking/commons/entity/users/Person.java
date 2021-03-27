@@ -1,7 +1,5 @@
 package mx.com.lickodev.stocktaking.commons.entity.users;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,31 +16,27 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
-@EqualsAndHashCode(callSuper = false, of = { "userName", "id" })
-public class User extends Person implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Table(name = "persons")
+@EqualsAndHashCode(of = { "id", "email" })
+public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 60, unique = true)
-	private String userName;
+	@Column(length = 60)
+	private String firstName;
 
-	@Column(length = 350)
-	private String password;
+	@Column(length = 60)
+	private String secondName;
 
-	private boolean enabled;
+	@Column(length = 60)
+	private String firstSurname;
 
-	private boolean accountNonExpired;
+	@Column(length = 60)
+	private String secondSurname;
 
-	private boolean credentialsNonExpired;
-
-	private boolean accountNonLocked;
+	@Column(length = 560, unique = true, nullable = false)
+	private String email;
 
 }
