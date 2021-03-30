@@ -20,9 +20,25 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import mx.com.lickodev.stocktaking.commons.exceptions.ProductNotFoundException;
 import mx.com.lickodev.stocktaking.commons.exceptions.UserNotFoundException;
 
+/**
+ * 
+ * @author saul_
+ * 
+ *         refs:
+ * 
+ *         -https://medium.com/@jovannypcg/understanding-springs-controlleradvice-cd96a364033f
+ * 
+ *         -https://github.com/jovannypcg/exception_handler
+ * 
+ *         -https://zetcode.com/springboot/controlleradvice/
+ */
 @RestControllerAdvice
 public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
+	/**
+	 * Este permite capturar las excepciones que se generan al utilizar la
+	 * anotación @Valid de Java para validación de objetos con ayuda del controller
+	 */
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -39,6 +55,18 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 	}
 
+	/**
+	 * Eset captura las excepciones que se marcan en el valor del @ExceptionHandler
+	 * y te permite manipularlas para darles formato o algo antes de enviarlas a
+	 * quien solicitó la petición, de esta forma puedes dar una mejor presentación a
+	 * los mensajes de error.
+	 * 
+	 * @param ex      excepcion generica qeu captura todas las excepciones que
+	 *                extiendan de ella
+	 * @param request el request de la solicitud
+	 * @return un objeto que contiene los errores conformato e información adicional
+	 *         para el solicitante
+	 */
 	@ExceptionHandler({ UserNotFoundException.class, ProductNotFoundException.class })
 	public ResponseEntity<Object> handleNotFoundException(Exception ex, WebRequest request) {
 
