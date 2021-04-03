@@ -9,6 +9,6 @@ import mx.com.lickodev.stocktaking.commons.entity.users.User;
 @RepositoryRestResource(path = "users")
 public interface UsersRepository extends JpaRepository<User, Long> {
 
-	public User findByUsername(@Param("userName") String userName);
+	public User findByUserName(@Param("userName") String userName);
 
 }

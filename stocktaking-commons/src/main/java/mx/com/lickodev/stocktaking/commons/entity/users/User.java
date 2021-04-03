@@ -44,5 +44,5 @@ public class User extends Person implements Serializable {
 	private boolean credentialsNonExpired;
 
 	private boolean accountNonLocked;
-
+	
 }
