@@ -47,6 +47,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				.scopes("read", "write").authorizedGrantTypes("password", "refresh_token")
 				.accessTokenValiditySeconds(Integer.valueOf(env.getProperty("time-validity.token")))
 				.refreshTokenValiditySeconds(Integer.valueOf(env.getProperty("time-validity.refresh-token")));
+
+		/**
+		 * How to refresh_token:
+		 * https://www.appsdeveloperblog.com/oauth-2-0-refresh-token-example/
+		 */
 	}
 
 	@Override
