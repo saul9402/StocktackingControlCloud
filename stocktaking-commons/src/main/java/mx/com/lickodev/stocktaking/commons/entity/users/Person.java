@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -17,11 +18,14 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "persons")
 @EqualsAndHashCode(of = { "id", "email" })
+/**
+ * https://www.dineshonjava.com/hibernate/implementing-inheritance-in-hibernate/
+ */
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person implements Serializable {
 
 	/**

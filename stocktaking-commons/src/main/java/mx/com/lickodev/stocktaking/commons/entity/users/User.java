@@ -7,12 +7,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -26,17 +24,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-@EqualsAndHashCode(callSuper = false, of = { "userName", "id" })
+@EqualsAndHashCode(callSuper = false, of = { "userName" })
+@PrimaryKeyJoinColumn(name = "person_id")
+/**
+ * https://docs.jboss.org/hibernate/orm/5.1/userguide/html_single/chapters/domain/inheritance.html
+ */
 public class User extends Person implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
 	@Column(length = 60, unique = true)
 	private String userName;
@@ -54,9 +52,9 @@ public class User extends Person implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns = {
-			@JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
+			@JoinColumn(name = "person_id", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "role_id", referencedColumnName = "id") }, uniqueConstraints = {
-							@UniqueConstraint(columnNames = { "user_id", "role_id" }) })
+							@UniqueConstraint(columnNames = { "person_id", "role_id" }) })
 	private List<Role> roles;
 
 }
