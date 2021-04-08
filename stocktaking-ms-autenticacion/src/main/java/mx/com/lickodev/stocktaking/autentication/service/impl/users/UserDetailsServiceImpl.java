@@ -1,8 +1,11 @@
 package mx.com.lickodev.stocktaking.autentication.service.impl.users;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,15 +26,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		try {
 			mx.com.lickodev.stocktaking.commons.entity.users.User user = userServiceFeignImpl.findByUsername(userName);
-//			Pendiente de implementacion por falta de entidad roles
-//			List<GrantedAuthority> authorities = user.getRoles().stream()
-//					.map(role -> new SimpleGrantedAuthority(role.getNombre()))
-//					.peek(authority -> log.info("Role: {}", authority.getAuthority())).collect(Collectors.toList());
+			List<GrantedAuthority> authorities = user.getRoles().stream()
+					.map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+					.peek(authority -> log.info("Role: {}", authority.getAuthority())).collect(Collectors.toList());
 
 			log.debug("Usuario autenticado: {}", userName);
 
 			return new User(userName, user.getPassword(), user.isEnabled(), user.isAccountNonExpired(),
-					user.isCredentialsNonExpired(), user.isAccountNonLocked(), new ArrayList<>());
+					user.isCredentialsNonExpired(), user.isAccountNonLocked(), authorities);
 
 		} catch (FeignException e) {
 			log.error("Error en el login, no existe el usuario '{}' en el sistema", userName);
