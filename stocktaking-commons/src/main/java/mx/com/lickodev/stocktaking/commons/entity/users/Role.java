@@ -1,7 +1,6 @@
 package mx.com.lickodev.stocktaking.commons.entity.users;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

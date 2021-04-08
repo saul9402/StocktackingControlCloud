@@ -51,14 +51,12 @@ public class User extends Person implements Serializable {
 	private boolean credentialsNonExpired;
 
 	private boolean accountNonLocked;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "users_roles", 
-	joinColumns = { @JoinColumn(name="user_id", referencedColumnName = "id") }, 
-	inverseJoinColumns = { @JoinColumn(name="role_id", referencedColumnName = "id")},
-	uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "role_id"} ) })
+	@JoinTable(name = "users_roles", joinColumns = {
+			@JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "role_id", referencedColumnName = "id") }, uniqueConstraints = {
+							@UniqueConstraint(columnNames = { "user_id", "role_id" }) })
 	private List<Role> roles;
 
-	
-	
 }
