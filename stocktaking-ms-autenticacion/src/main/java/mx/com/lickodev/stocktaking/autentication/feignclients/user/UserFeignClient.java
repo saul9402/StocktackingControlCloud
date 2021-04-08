@@ -9,7 +9,7 @@ import mx.com.lickodev.stocktaking.commons.entity.users.User;
 @FeignClient(name = "stocktaking-ms-users")
 public interface UserFeignClient {
 
-	@GetMapping(value = "/users/search/findByUsername")
-	public User findByUsername(@RequestParam String username);
+	@GetMapping(value = "/users/search/findByUserName")
+	public User findByUsername(@RequestParam String userName);
 
 }
