@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -15,6 +16,8 @@ public class StocktakingMsUsuariosApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StocktakingMsUsuariosApplication.class, args);
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		bCryptPasswordEncoder.encode("1");
 	}
 
 }
